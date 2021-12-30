@@ -15,16 +15,20 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 server = app.server
 
-app.layout = html.Div([
-    html.H2('Hello World'),
-    html.H2(df.Area.iloc[0]),
-    dcc.Dropdown(
-        id='dropdown',
-        options=[{'label': i, 'value': i} for i in ['LA', 'NYC', 'MTL']],
-        value='LA'
-    ),
-    html.Div(id='display-value')
-])
+def prepare_layout():
+    layout = html.Div([
+        html.H2('Hello World'),
+        html.H2(df.Area.iloc[0]),
+        dcc.Dropdown(
+            id='dropdown',
+            options=[{'label': i, 'value': i} for i in ['LA', 'NYC', 'MTL']],
+            value='LA'
+        ),
+        html.Div(id='display-value')
+    ])
+    return layout
+
+app.layout = prepare_layout
 
 @app.callback(dash.dependencies.Output('display-value', 'children'),
                 [dash.dependencies.Input('dropdown', 'value')])
