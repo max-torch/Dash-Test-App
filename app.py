@@ -46,7 +46,6 @@ server = app.server
 
 def main():
     """Main routine."""
-    generate_dashboard()
     app.run_server(debug=False)
 
     
@@ -476,6 +475,7 @@ def generate_dashboard():
             filtered_orders = filtered_orders[filtered_orders.province == location]
         return generate_figures(filtered_orders, location)
 
+generate_dashboard()
 
 if __name__ == "__main__":
     main()
